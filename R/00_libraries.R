@@ -1,0 +1,7 @@
+library(rvest)
+library(xml2)
+library(stringr)
+library(rlang)
+library(dplyr)
+library(purrr)
+library(writexl)
