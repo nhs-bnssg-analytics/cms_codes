@@ -129,10 +129,20 @@ prod_codes_definition <- descriptions |>
   ) |> 
   select(!c("filename"))
 
+cover_sheet <- descriptions |> 
+  select(c("CONDITION.CODE", 
+           "CONDITION.DESCRIPTION",
+           "USAGE.DEFINITION",
+           "TYPE",
+           "NUMBER.OF.CODES")) |> 
+  distinct()
+
 writexl::write_xlsx(
   x = list(
+    `cover sheet` = cover_sheet,
     medcodes = med_codes_definition,
     prodcodes = prod_codes_definition
   ),
   path = "outputs/data_specification.xlsx"
 )
+
