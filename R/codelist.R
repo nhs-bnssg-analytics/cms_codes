@@ -137,6 +137,9 @@ cover_sheet <- descriptions |>
            "NUMBER.OF.CODES")) |> 
   distinct()
 
+if (!isTRUE(file.info("outputs")$isdir)) 
+  dir.create("outputs", recursive = TRUE)
+
 writexl::write_xlsx(
   x = list(
     `cover sheet` = cover_sheet,
