@@ -129,6 +129,24 @@ prod_codes_definition <- descriptions |>
   ) |> 
   select(!c("filename"))
 
+# gemscript to dmd lkp
+gemscript_lkp <- read.delim(
+  "https://www.whatdotheyknow.com/request/gemscript_drug_code_to_snomed_dm/response/1609899/attach/2/gemscript%20dmd%202020%2007.txt?cookie_passthrough=1"
+) |> 
+  select(
+    "gemscriptcode",
+    "dmdcode"
+  )
+
+# apply lkp to prod code table
+prod_codes_definition <- prod_codes_definition |> 
+  left_join(
+    gemscript_lkp,
+    by = join_by(
+      gemscriptcode
+    )
+  )
+
 cover_sheet <- descriptions |> 
   select(c("CONDITION.CODE", 
            "CONDITION.DESCRIPTION",
